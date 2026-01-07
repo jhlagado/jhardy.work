@@ -5,22 +5,21 @@ This document defines the product requirements and operating principles for an A
 ## Table of Contents
 
 **Core Sections (10)**
-- [1. Introduction (Expanded)](#1-introduction-expanded)
-- [2. Design Foundations (Expanded)](#2-design-foundations-expanded)
-- [3. Content Creation Workflow (Expanded)](#3-content-creation-workflow-expanded)
-- [4. Draft Lifecycle (Expanded)](#4-draft-lifecycle-expanded)
-- [5. Metadata & Tagging Rules (Expanded)](#5-metadata--tagging-rules-expanded)
-- [6. Internal Linking Conventions (Expanded)](#6-internal-linking-conventions-expanded)
-- [7. Asset Management (Expanded)](#7-asset-management-expanded)
-- [8. Review Gate (Expanded)](#8-review-gate-expanded)
-- [9. AI Vocabulary (Expanded)](#9-ai-vocabulary-expanded)
-- [10. CI and Publishing Process (Expanded)](#10-ci-and-publishing-process-expanded)
-- [11. CI and Publishing Process (Revisited and Expanded)](#11-ci-and-publishing-process-revisited-and-expanded)
-- [12. CSS and Styling (Expanded)](#12-css-and-styling-expanded)
+- [1. Introduction](#1-introduction)
+- [2. Design Foundations](#2-design-foundations)
+- [3. Content Creation Workflow](#3-content-creation-workflow)
+- [4. Draft Lifecycle](#4-draft-lifecycle)
+- [5. Metadata & Tagging Rules](#5-metadata--tagging-rules)
+- [6. Internal Linking Conventions](#6-internal-linking-conventions)
+- [7. Asset Management](#7-asset-management)
+- [8. Review Gate](#8-review-gate)
+- [9. AI Vocabulary](#9-ai-vocabulary)
+- [10. CI and Publishing Process](#10-ci-and-publishing-process)
+- [11. CI and Publishing Implementation Details](#11-ci-and-publishing-implementation-details)
+- [12. CSS and Styling](#12-css-and-styling)
 - [Conclusion](#conclusion)
 
-## 1. Introduction (Expanded)
-
+## 1. Introduction
 In this section, we’re setting the stage for the entire project. The vision is to create a blog that serves two major purposes: first, it’s a comprehensive documentation tool for capturing technical processes, ideas, and experiences. Second, it acts as a testbed where we experiment with AI-driven content creation and classic web design principles.
 
 The core philosophy of this blog is to embrace the original spirit of the web: clean, semantic HTML that’s easy for both humans and machines to read, minimal and unobtrusive JavaScript that enhances rather than overwhelms, and a strong focus on accessibility. We want the blog to be readable and navigable by everyone, including those using assistive technologies.
@@ -41,8 +40,7 @@ The long-term purpose goes beyond blogging. Entries are intended to seed other f
 
 The first public content should document the build itself. This spec should translate into a narrative series that shows the decisions, tradeoffs, and implementation steps behind the blog.
 
-## 2. Design Foundations (Expanded)
-
+## 2. Design Foundations
 This section dives into the core principles that will shape the blog’s design and user experience. We’re focusing on four key pillars: semantic HTML, accessibility, minimal JavaScript, and a mobile-first approach.
 
 **Semantic HTML** means structuring content with meaningful tags that clearly define the role of each part of the page. This not only makes the content easier for humans to understand but also helps search engines and assistive technologies interpret it accurately. We’re not just building pages; we’re creating a well-labeled, well-structured document that stands the test of time.
@@ -63,8 +61,7 @@ The site should reflect the classic, server-rendered web. HTML should be legible
 
 This document is written to brief an AI while remaining readable as a narrative. Each section should stand on its own as a potential future blog post, with a linear flow from principles to implementation so the process can be published as a series without heavy rewriting.
 
-## 3. Content Creation Workflow (Expanded)
-
+## 3. Content Creation Workflow
 This section breaks down how each blog post comes to life, from the initial conversation to the final published piece.
 
 **Conversational Drafting** is at the heart of this workflow. Instead of starting with a blank page, you’ll have a dialogue with the AI. During this chat, the AI will help you figure out what the post is about, suggest a human-readable title, and identify relevant tags. It’ll also clarify the post’s status—whether it’s a draft, ready for review, or good to go live. Along the way, the AI will help you gather any necessary assets, like code snippets, images, or links, and figure out where they fit into the post.
@@ -83,8 +80,7 @@ The system should also support capture-first writing, where a rough note or dict
 
 Prompts should accept explicit parameters such as target length, required links, and optional image generation, so the AI can produce consistent output without repeated manual guidance.
 
-## 4. Draft Lifecycle (Expanded)
-
+## 4. Draft Lifecycle
 In this section, we’ll dive deeper into how each article moves through its lifecycle, from the initial draft to its final published state (and beyond if needed). We’re defining a clear, metadata-driven workflow so that the status of each post is always transparent and easy to manage.
 
 We’ve got four main states: **draft, review, published, and archived**. When you start writing, the post is in the draft state. It’s still being developed, so it’s not visible in any public indexes or listings. Once you’ve got a complete draft that you’re ready to refine, you move it to the review state. This is your chance to do final checks—maybe polish the language, confirm all the links are correct, and make sure all the necessary assets are in place.
@@ -103,8 +99,7 @@ Not every entry needs to be public. Drafts can serve as private diary notes or r
 
 Scheduling can remain simple: publication should be triggered by status changes and commit history, not by separate scheduling tools. If a future scheduler is needed, it should be metadata-driven and compatible with static workflows.
 
-## 5. Metadata & Tagging Rules (Expanded)
-
+## 5. Metadata & Tagging Rules
 This section is all about the backbone of how we organize and categorize each piece of content—through metadata and tags. The metadata lives in the frontmatter of each markdown file and acts as the single source of truth for the blog’s organization. It includes fields like the title, date, status, summary, and tags. Each of these fields helps determine where and how the post appears across the site.
 
 When it comes to **tags**, we’re taking a controlled and normalized approach. Tags are case-insensitive, which means it doesn’t matter if you write “Z80” or “z80”—they’ll be treated the same. We also ignore minor variations like hyphens or underscores, so “Z-80” and “Z_80” also get folded into the same tag. This helps keep our tagging system clean and prevents tag sprawl, where you end up with a bunch of near-duplicate tags that all mean the same thing.
@@ -119,8 +114,7 @@ Tags and metadata should be rich enough to support multiple thematic tracks, fro
 
 A lightweight series or stream identifier may be useful to keep multi-topic work organized without splitting the site into separate systems. This should remain optional so the default path stays simple.
 
-## 6. Internal Linking Conventions (Expanded)
-
+## 6. Internal Linking Conventions
 In this section, we’ll outline how internal links are handled to ensure that your blog remains both navigable and resilient. Internal linking is all about connecting related posts and making it easy for readers to explore your content. We want to ensure that these links are stable and straightforward, and that they don’t break if you ever reorganize your content.
 
 We’ll use **relative paths** for internal links, meaning that links will point to other posts based on their folder structure rather than hard-coded URLs. This makes the system more flexible. If you need to move or rename a post, you can update the link paths without breaking the overall structure.
@@ -131,8 +125,7 @@ Overall, the goal is to keep internal linking intuitive and robust. By using a c
 
 Internal links should be validated during CI; unresolved references are warnings in development and can be promoted to errors only when they would ship broken navigation. External links should include descriptive context to avoid empty or ambiguous anchor text.
 
-## 7. Asset Management (Expanded)
-
+## 7. Asset Management
 In this section, we’ll dive into how we handle assets—like images, code snippets, PDFs, and other media—so that they’re easy to manage and reuse. Our approach is to keep assets close to the articles they belong to, ensuring that everything related to a post is self-contained.
 
 **Co-located assets** mean that each article’s images and other media live right alongside its markdown file in the same folder. This makes it easy to keep track of which assets belong to which post, and it ensures that all the references in the markdown file are relative and easy to maintain. If you ever need to move or archive a post, you can just move the entire folder, and all its assets will come along for the ride.
@@ -147,8 +140,7 @@ Assets should be optimized before commit (compressed images, trimmed PDFs), and 
 
 Thumbnails are optional but supported. If used, they should be small, lightweight images intended for index views or social sharing, and they should be generated or selected deliberately rather than inferred automatically.
 
-## 8. Review Gate (Expanded)
-
+## 8. Review Gate
 In this section, we’ll flesh out the idea of the review gate—the final checkpoint before a post goes from “review” to “published.” The review gate is not about creating bureaucratic hurdles; it’s about ensuring quality and consistency before a post goes live.
 
 At this stage, you or the AI will do a final pass over the content to make sure everything is in order. You’ll confirm that the summary accurately reflects the article, that all internal and external links are valid, and that any images or other assets are properly included. This is also a good time to double-check the metadata—things like tags and statuses—to make sure everything is correct and complete.
@@ -161,8 +153,7 @@ The review step should verify factual accuracy, link integrity, and metadata com
 
 Review can be lightweight or deep depending on the post, but the default should be quick enough that publishing remains frictionless. When AI drafts are used, the review step is where tone, accuracy, and intent are confirmed.
 
-## 9. AI Vocabulary (Expanded)
-
+## 9. AI Vocabulary
 This section is all about the common language you and the AI will use to make content creation smooth and intuitive. We’ve defined a minimal set of verbs—like create, revise, tag, link, attach, and status—that let you communicate your intentions clearly and consistently.
 
 The idea is that each of these verbs represents a simple, well-defined action that the AI can understand and eventually turn into reusable scripts. For example, when you say “create,” the AI knows to start a new article with a given title and initial metadata. When you say “revise,” it knows to update the content of an existing draft without changing its status.
@@ -186,8 +177,7 @@ The vocabulary should remain stable so scripts can depend on it.
 
 These verbs should be usable from the command line or a minimal UI, so an instruction like "create a 500-word post with these links and images" can map cleanly to scripted behavior without manual UI work.
 
-## 10. CI and Publishing Process (Expanded)
-
+## 10. CI and Publishing Process
 In this final section, we’re going to expand on how the continuous integration (CI) pipeline and publishing process will work. The CI pipeline is like the behind-the-scenes engine that takes your markdown files and turns them into a fully functional website.
 
 Here’s how it works: whenever you push a new commit or merge a pull request, the CI pipeline automatically kicks in. It grabs the latest markdown files, converts them into HTML using your templates, and assembles the entire site into a build directory. That build directory is then deployed to the `gh-pages` branch, which is the branch that GitHub Pages uses to serve your site to the public.
@@ -204,7 +194,7 @@ The system must support archives by date, topic, and tag, and provide a simple s
 
 Builds should be efficient, with incremental regeneration where possible so new posts do not require rebuilding the entire site. If a static generator is used, it should take advantage of caching or partial builds to keep iteration fast.
 
-## 11. CI and Publishing Process (Revisited and Expanded)
+## 11. CI and Publishing Implementation Details
 
 This subsection makes the CI pipeline concrete by detailing markdown conversion, templates, and index generation.
 
@@ -232,8 +222,7 @@ This project should avoid heavy frameworks where simple scripts can suffice. If 
 
 When tasks exceed simple shell scripts, Python is an acceptable default, but the scripts should remain small, readable, and focused on a single responsibility. The goal is to keep the toolchain approachable while still powerful enough for automation.
 
-## 12. CSS and Styling (Expanded)
-
+## 12. CSS and Styling
 In this section, we’ll dive into the philosophy and practices that will shape the visual design of the blog. Our goal is to create a clean, responsive, and accessible design using a minimalist toolchain. We want to avoid heavyweight CSS frameworks and instead rely on native CSS features and best practices.
 
 ### Minimalist Toolchain
