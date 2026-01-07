@@ -4,7 +4,6 @@ This document defines the product requirements and operating principles for an A
 
 ## Table of Contents
 
-**Core Sections (10)**
 - [1. Introduction](#1-introduction)
 - [2. Design Foundations](#2-design-foundations)
 - [3. Content Creation Workflow](#3-content-creation-workflow)
@@ -17,9 +16,12 @@ This document defines the product requirements and operating principles for an A
 - [10. CI and Publishing Process](#10-ci-and-publishing-process)
 - [11. CI and Publishing Implementation Details](#11-ci-and-publishing-implementation-details)
 - [12. CSS and Styling](#12-css-and-styling)
+- [13. Explicit Non-Goals](#13-explicit-non-goals)
+- [14. Execution Plan](#14-execution-plan)
 - [Conclusion](#conclusion)
 
 ## 1. Introduction
+
 In this section, we’re setting the stage for the entire project. The vision is to create a blog that serves two major purposes: first, it’s a comprehensive documentation tool for capturing technical processes, ideas, and experiences. Second, it acts as a testbed where we experiment with AI-driven content creation and classic web design principles.
 
 The core philosophy of this blog is to embrace the original spirit of the web: clean, semantic HTML that’s easy for both humans and machines to read, minimal and unobtrusive JavaScript that enhances rather than overwhelms, and a strong focus on accessibility. We want the blog to be readable and navigable by everyone, including those using assistive technologies.
@@ -30,9 +32,15 @@ Scope and audience are explicit: the primary reader is the author and technicall
 
 The blog also serves as a primary source for a broader content strategy. Material captured here in the form of a technical diary is intended to be repurposed for future media, including YouTube videos, Tiktoks, or long-form books.
 
+Ease of capture is critical. A post should be draftable in minutes, with the AI handling structure and presentation while the author supplies intent and raw material. The system should feel closer to narrating a workday than to running a publishing project.
+
 The blog is also a technical diary. Posts should be easy to create on demand, often in the 500-word range, with enough structure to carry links, code, and images when needed. The aim is to document daily work in a way that remains useful later, both to the author and to readers who want a concise, high-quality view into the process.
 
 The project is also an experiment in public voice and discoverability. It should be friendly to search engines and to other AI systems that ingest and summarize content, which means clarity, stable structure, and predictable metadata.
+
+Quality should remain high even with rapid posting. Posts should read as deliberate and well-formed, not as rough dumps, while still keeping the barrier to capture low enough for daily use.
+
+Freshness matters for the author’s momentum and for external visibility. The system should encourage a steady cadence without turning publishing into a chore.
 
 Owning the domain is a non-negotiable requirement. The publishing stack can evolve, but DNS and canonical URLs should remain under the author's control to keep content portable. Over time, the system should support multiple subject streams (for example, retrocomputing and Z80 work alongside modern AI tooling) without fragmenting the archive.
 
@@ -40,7 +48,10 @@ The long-term purpose goes beyond blogging. Entries are intended to seed other f
 
 The first public content should document the build itself. This spec should translate into a narrative series that shows the decisions, tradeoffs, and implementation steps behind the blog.
 
+Each section should read as a standalone piece that can be published with minimal rewriting when the build story goes live.
+
 ## 2. Design Foundations
+
 This section dives into the core principles that will shape the blog’s design and user experience. We’re focusing on four key pillars: semantic HTML, accessibility, minimal JavaScript, and a mobile-first approach.
 
 **Semantic HTML** means structuring content with meaningful tags that clearly define the role of each part of the page. This not only makes the content easier for humans to understand but also helps search engines and assistive technologies interpret it accurately. We’re not just building pages; we’re creating a well-labeled, well-structured document that stands the test of time.
@@ -53,7 +64,11 @@ Finally, our **mobile-first approach** ensures that the site is designed to look
 
 A key UX goal is **Smooth Navigation Transitions**. Conventional blogs often suffer from "undisciplined navigation flashes" during page loads. We aim to mitigate this by using the History API and XHR/Fetch to create a seamless, SPA-like experience for internal navigation while remaining a strictly static site at its core.
 
+This behavior is strictly optional progressive enhancement. If JavaScript is disabled or the enhancement fails, standard link navigation should remain the default and should not feel broken or degraded.
+
 In short, this section is all about the foundational principles that will guide the design and ensure the blog is not just functional and accessible, but also timeless and user-friendly.
+
+Search visibility should be a first-order concern. Pages should include clear headings, descriptive titles, stable URLs, and metadata that enable search engines and other AI systems to interpret the content without guessing.
 
 Accessibility should target WCAG 2.1 AA where applicable, with regular contrast checks and keyboard testing. Performance expectations should include a defined budget for total page weight and image sizes to keep initial loads fast on mobile connections.
 
@@ -62,6 +77,7 @@ The site should reflect the classic, server-rendered web. HTML should be legible
 This document is written to brief an AI while remaining readable as a narrative. Each section should stand on its own as a potential future blog post, with a linear flow from principles to implementation so the process can be published as a series without heavy rewriting.
 
 ## 3. Content Creation Workflow
+
 This section breaks down how each blog post comes to life, from the initial conversation to the final published piece.
 
 **Conversational Drafting** is at the heart of this workflow. Instead of starting with a blank page, you’ll have a dialogue with the AI. During this chat, the AI will help you figure out what the post is about, suggest a human-readable title, and identify relevant tags. It’ll also clarify the post’s status—whether it’s a draft, ready for review, or good to go live. Along the way, the AI will help you gather any necessary assets, like code snippets, images, or links, and figure out where they fit into the post.
@@ -80,7 +96,12 @@ The system should also support capture-first writing, where a rough note or dict
 
 Prompts should accept explicit parameters such as target length, required links, and optional image generation, so the AI can produce consistent output without repeated manual guidance.
 
+Posts should support code snippets as first-class content. Snippets should live in fenced code blocks with language identifiers where possible, remain copyable without client-side tooling, and stay readable in plain HTML. If a snippet is large or likely to be reused, it should be stored as a separate file in the post folder and referenced explicitly from the markdown.
+
+The drafting flow should accept asset paths and image requests up front. If the author provides images, the AI should place and caption them; if images are requested, the AI should either generate them or leave explicit placeholders with filenames so the author can fill them later. Thumbnails, when used, should be indicated in the frontmatter so index pages can surface them consistently.
+
 ## 4. Draft Lifecycle
+
 In this section, we’ll dive deeper into how each article moves through its lifecycle, from the initial draft to its final published state (and beyond if needed). We’re defining a clear, metadata-driven workflow so that the status of each post is always transparent and easy to manage.
 
 We’ve got four main states: **draft, review, published, and archived**. When you start writing, the post is in the draft state. It’s still being developed, so it’s not visible in any public indexes or listings. Once you’ve got a complete draft that you’re ready to refine, you move it to the review state. This is your chance to do final checks—maybe polish the language, confirm all the links are correct, and make sure all the necessary assets are in place.
@@ -100,6 +121,7 @@ Not every entry needs to be public. Drafts can serve as private diary notes or r
 Scheduling can remain simple: publication should be triggered by status changes and commit history, not by separate scheduling tools. If a future scheduler is needed, it should be metadata-driven and compatible with static workflows.
 
 ## 5. Metadata & Tagging Rules
+
 This section is all about the backbone of how we organize and categorize each piece of content—through metadata and tags. The metadata lives in the frontmatter of each markdown file and acts as the single source of truth for the blog’s organization. It includes fields like the title, date, status, summary, and tags. Each of these fields helps determine where and how the post appears across the site.
 
 When it comes to **tags**, we’re taking a controlled and normalized approach. Tags are case-insensitive, which means it doesn’t matter if you write “Z80” or “z80”—they’ll be treated the same. We also ignore minor variations like hyphens or underscores, so “Z-80” and “Z_80” also get folded into the same tag. This helps keep our tagging system clean and prevents tag sprawl, where you end up with a bunch of near-duplicate tags that all mean the same thing.
@@ -114,7 +136,12 @@ Tags and metadata should be rich enough to support multiple thematic tracks, fro
 
 A lightweight series or stream identifier may be useful to keep multi-topic work organized without splitting the site into separate systems. This should remain optional so the default path stays simple.
 
+If separate blogs are eventually needed, the system should allow a clean split without rewriting content or breaking URLs. The default, however, is a single domain with multiple streams and clear metadata boundaries.
+
+Tag vocabulary should be curated over time. When new tags are introduced, they should either map to existing canonical tags or be added deliberately, so that long-term archives remain coherent and searchable.
+
 ## 6. Internal Linking Conventions
+
 In this section, we’ll outline how internal links are handled to ensure that your blog remains both navigable and resilient. Internal linking is all about connecting related posts and making it easy for readers to explore your content. We want to ensure that these links are stable and straightforward, and that they don’t break if you ever reorganize your content.
 
 We’ll use **relative paths** for internal links, meaning that links will point to other posts based on their folder structure rather than hard-coded URLs. This makes the system more flexible. If you need to move or rename a post, you can update the link paths without breaking the overall structure.
@@ -125,7 +152,12 @@ Overall, the goal is to keep internal linking intuitive and robust. By using a c
 
 Internal links should be validated during CI; unresolved references are warnings in development and can be promoted to errors only when they would ship broken navigation. External links should include descriptive context to avoid empty or ambiguous anchor text.
 
+Archives should be easy to browse by year and month, with tag pages and topic indexes that let the author trawl back through time without relying on full-text search. A simple search experience can be client-side and optional, but it should be fast, lightweight, and optional so the site remains usable without JavaScript.
+
+Slugs and canonical URLs should be treated as durable identifiers. If a title changes, the slug should only change when there is a deliberate migration plan, and any redirects should be documented so the archive does not fragment.
+
 ## 7. Asset Management
+
 In this section, we’ll dive into how we handle assets—like images, code snippets, PDFs, and other media—so that they’re easy to manage and reuse. Our approach is to keep assets close to the articles they belong to, ensuring that everything related to a post is self-contained.
 
 **Co-located assets** mean that each article’s images and other media live right alongside its markdown file in the same folder. This makes it easy to keep track of which assets belong to which post, and it ensures that all the references in the markdown file are relative and easy to maintain. If you ever need to move or archive a post, you can just move the entire folder, and all its assets will come along for the ride.
@@ -138,9 +170,12 @@ The asset model prioritizes organization, durability, and portability by co-loca
 
 Assets should be optimized before commit (compressed images, trimmed PDFs), and every image should include accessible alt text in the markdown. Asset paths should remain relative so posts stay portable across environments.
 
+AI-generated images are allowed but should be explicitly named and stored alongside the post with clear filenames. If generation metadata or prompts are kept, they should live in the same folder so the asset remains reproducible without external services.
+
 Thumbnails are optional but supported. If used, they should be small, lightweight images intended for index views or social sharing, and they should be generated or selected deliberately rather than inferred automatically.
 
 ## 8. Review Gate
+
 In this section, we’ll flesh out the idea of the review gate—the final checkpoint before a post goes from “review” to “published.” The review gate is not about creating bureaucratic hurdles; it’s about ensuring quality and consistency before a post goes live.
 
 At this stage, you or the AI will do a final pass over the content to make sure everything is in order. You’ll confirm that the summary accurately reflects the article, that all internal and external links are valid, and that any images or other assets are properly included. This is also a good time to double-check the metadata—things like tags and statuses—to make sure everything is correct and complete.
@@ -154,6 +189,7 @@ The review step should verify factual accuracy, link integrity, and metadata com
 Review can be lightweight or deep depending on the post, but the default should be quick enough that publishing remains frictionless. When AI drafts are used, the review step is where tone, accuracy, and intent are confirmed.
 
 ## 9. AI Vocabulary
+
 This section is all about the common language you and the AI will use to make content creation smooth and intuitive. We’ve defined a minimal set of verbs—like create, revise, tag, link, attach, and status—that let you communicate your intentions clearly and consistently.
 
 The idea is that each of these verbs represents a simple, well-defined action that the AI can understand and eventually turn into reusable scripts. For example, when you say “create,” the AI knows to start a new article with a given title and initial metadata. When you say “revise,” it knows to update the content of an existing draft without changing its status.
@@ -162,22 +198,14 @@ Over time, these verbs will form the basis of a shared vocabulary that makes it 
 
 In short, the AI vocabulary is the bridge between conversational authoring and automated scripting. It gives you a consistent, easy-to-use set of tools to direct the AI and ensures that the system remains flexible and user-friendly as it evolves.
 
-Verbs should map to deterministic actions: 
-- **create**: Generates a folder and stub.
-- **revise**: Edits content without status changes.
-- **tag**: Assigns or modifies normalized tags.
-- **link**: Creates or adjusts internal/external links.
-- **attach**: Copies or generates assets into the article folder.
-- **status**: Updates metadata (visibility/lifecycle) only.
-- **summarize**: Specifically refines the metadata summary field.
-- **find**: Locates content by title, tag, date, or concept within the repo.
-- **inspect**: Read-only reporting on state (e.g., metadata or broken links).
+Verbs should map to deterministic actions in prose and in tooling. Create generates a folder and stub, revise edits content without status changes, tag assigns or modifies normalized tags, link creates or adjusts internal or external links, attach copies or generates assets into the article folder, status updates visibility metadata only, summarize refines the metadata summary field, find locates content by title, tag, date, or concept within the repo, and inspect provides read-only reporting on state such as metadata completeness or broken links.
 
 The vocabulary should remain stable so scripts can depend on it.
 
 These verbs should be usable from the command line or a minimal UI, so an instruction like "create a 500-word post with these links and images" can map cleanly to scripted behavior without manual UI work.
 
 ## 10. CI and Publishing Process
+
 In this final section, we’re going to expand on how the continuous integration (CI) pipeline and publishing process will work. The CI pipeline is like the behind-the-scenes engine that takes your markdown files and turns them into a fully functional website.
 
 Here’s how it works: whenever you push a new commit or merge a pull request, the CI pipeline automatically kicks in. It grabs the latest markdown files, converts them into HTML using your templates, and assembles the entire site into a build directory. That build directory is then deployed to the `gh-pages` branch, which is the branch that GitHub Pages uses to serve your site to the public.
@@ -190,9 +218,15 @@ CI should run in a clean environment with pinned tool versions to keep output st
 
 Platform selection remains open between a WordPress workflow and a static workflow, but the preference is for a markdown-first system that keeps the content programmable and portable. If WordPress is used, publishing should happen through the REST API or wp-cli with application passwords so the UI is optional. If GitHub Pages is used, the pipeline should remain free and automated, with the option to bind a custom domain that the author owns.
 
+Cost control matters. The default assumption is free or near-zero hosting and tooling, with paid services only if they bring clear, deliberate value. The existing WordPress blog can serve as a testbed while a static workflow is evaluated, and the existing resume site on GitHub Pages can be merged into the same repo or linked as a first-class section. Setup and publishing should be achievable from the command line using tools like `gh` and `wp-cli`, with UI workflows treated as optional rather than required.
+
+Platform choice should be evaluated against concrete criteria: time to publish from a prompt, portability of content, ease of search and archives, and long-term cost of maintenance. If WordPress is used initially, the goal is still to keep content in markdown so migration to a static system remains straightforward.
+
 The system must support archives by date, topic, and tag, and provide a simple search experience without requiring server-side infrastructure. If search is client-side, it should be lightweight and optional so the site remains usable without JavaScript.
 
 Builds should be efficient, with incremental regeneration where possible so new posts do not require rebuilding the entire site. If a static generator is used, it should take advantage of caching or partial builds to keep iteration fast.
+
+Differential publishing is a core expectation. The build should avoid reprocessing unchanged content wherever possible so the author can publish frequently without long build times.
 
 ## 11. CI and Publishing Implementation Details
 
@@ -222,7 +256,10 @@ This project should avoid heavy frameworks where simple scripts can suffice. If 
 
 When tasks exceed simple shell scripts, Python is an acceptable default, but the scripts should remain small, readable, and focused on a single responsibility. The goal is to keep the toolchain approachable while still powerful enough for automation.
 
+Each script should have a clearly documented entry point and an explicit input/output contract, even if that is only described in comments or a short README. Where possible, scripts should support a dry-run mode to keep automation safe and debuggable.
+
 ## 12. CSS and Styling
+
 In this section, we’ll dive into the philosophy and practices that will shape the visual design of the blog. Our goal is to create a clean, responsive, and accessible design using a minimalist toolchain. We want to avoid heavyweight CSS frameworks and instead rely on native CSS features and best practices.
 
 ### Minimalist Toolchain
@@ -245,6 +282,36 @@ Styling should define a typography scale, spacing rhythm, and a small set of tok
 
 The visual design should reinforce the classic-web values in the content: fast loading, readable typography, durable layouts, and a sense that the site is authored rather than templated. The same system can support a resume section or other personal pages without breaking the editorial tone.
 
+Branding should be minimal but intentional. A small set of type and color tokens can carry the identity across the blog and resume without making the layout feel like a template, and print-friendly styling should keep the resume usable as a standalone document.
+
+## 13. Explicit Non-Goals
+
+To maintain focus and prevent dependency creep, the project explicitly avoids a CMS UI, live or direct database editing, reader-visible version history, strict link enforcement, and heavy build tooling. All authoring and management happens through conversation and CLI, the filesystem and Git remain the single source of truth, historical edits are for the author only, broken or forward links generate warnings rather than errors, and complex NPM-heavy frameworks such as Webpack or Tailwind are out of scope.
+
+## 14. Execution Plan
+
+The execution plan favors a fast proof of the end-to-end workflow, then deliberate refinement. Each phase should be complete enough to publish real posts and prove that the system works under daily use before expanding scope.
+
+### Phase One: Content Model and Repository Foundations
+
+Phase One locks the content model and repository structure. The frontmatter schema is finalized, slug and URL rules are fixed, status behavior is proven, and the folder layout is chosen so posts and assets remain portable. Platform selection is decided using the criteria in this document, and domain ownership with canonical URLs is confirmed so future migrations do not break links.
+
+### Phase Two: Minimum Viable Publishing Pipeline
+
+Phase Two delivers a working pipeline that converts markdown to HTML, generates indexes, copies assets, and validates links. The build runs locally and in CI with pinned versions, and deploys deterministically to the chosen host. The goal is a repeatable build that can publish a post with minimal friction and no manual edits.
+
+### Phase Three: Authoring and Review Automation
+
+Phase Three focuses on authoring ergonomics and review safeguards. The AI vocabulary maps to CLI commands that create posts, revise content, set status, and attach assets. Review checks for metadata completeness, link integrity, and summary accuracy become part of the pre-publish flow so quality remains consistent without slowing daily capture.
+
+### Phase Four: Design, Accessibility, and Progressive Enhancement
+
+Phase Four brings the visual system to its intended quality. Typography, spacing, and color tokens are set; the resume section is integrated without breaking editorial tone; and accessibility and performance budgets are validated. Optional smooth navigation transitions are layered in only after baseline performance and HTML readability are solid.
+
+### Phase Five: Content Rollout and Iteration
+
+Phase Five scales real publishing. The initial build-log series is released, the daily diary cadence is tested, tags and topic streams are refined, and the system is tuned based on friction observed in actual use. This phase also defines how posts are repurposed into talks, videos, or longer-form writing so the workflow supports the broader content strategy.
+
 ## Conclusion
 
 This setup provides a flexible platform for documenting technical work, supported by AI-assisted drafting, a streamlined publishing pipeline, and a lightweight, accessible design system.
@@ -255,13 +322,6 @@ In the end, this is about more than just blogging—it’s about capturing your 
 
 A short roadmap can capture which pieces are immediate (content model, publishing pipeline) and which are iterative (automation scripts, design refinements). The concluding aim is a durable, maintainable system that remains readable and useful over time.
 
-## 12. Explicit Non-Goals
-
-To maintain focus and prevent dependency creep, the following are explicitly NOT goals of this project:
-- **No CMS UI**: All authoring and management happens via conversation and CLI.
-- **No Live/Direct Database Editing**: The filesystem and Git remain the single source of truth.
-- **No Reader-Visible Version History**: Historical edits are for the author's internal use via Git.
-- **No Strict Link Enforcement**: Broken or forward links generate warnings, not errors.
-- **No Heavy Build Tooling**: Avoid Webpack, Tailwind, or complex NPM-heavy frameworks.
+The first implementation should be intentionally simple so the publishing workflow can be proven quickly. From there, the system can evolve toward richer automation without losing the clarity of the content model.
 
 Content from the blog should be easy to repurpose into talks, videos, and longer-form writing, which means structure and metadata are part of the creative output, not just technical overhead. The blog itself becomes the first case study in the process it documents.
