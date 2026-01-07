@@ -1,7 +1,10 @@
+# AI-Driven Blogging Setup: Product Requirements
+
+This document defines the product requirements and operating principles for an AI-assisted technical diary and publishing system built on classic web values.
+
 ## Table of Contents
 
 **Core Sections (10)**
-
 - [1. Introduction (Expanded)](#1-introduction-expanded)
 - [2. Design Foundations (Expanded)](#2-design-foundations-expanded)
 - [3. Content Creation Workflow (Expanded)](#3-content-creation-workflow-expanded)
@@ -12,76 +15,9 @@
 - [8. Review Gate (Expanded)](#8-review-gate-expanded)
 - [9. AI Vocabulary (Expanded)](#9-ai-vocabulary-expanded)
 - [10. CI and Publishing Process (Expanded)](#10-ci-and-publishing-process-expanded)
-
-**Supporting Sections**
-
-- [Original Outline (Verbatim)](#original-outline-verbatim)
-- [10. CI and Publishing Process (Revisited and Expanded)](#10-ci-and-publishing-process-revisited-and-expanded)
-- [11. CSS and Styling (Expanded)](#11-css-and-styling-expanded)
+- [11. CI and Publishing Process (Revisited and Expanded)](#11-ci-and-publishing-process-revisited-and-expanded)
+- [12. CSS and Styling (Expanded)](#12-css-and-styling-expanded)
 - [Conclusion](#conclusion)
-
-
-## Original Outline (Verbatim)
-
-```markdown
-# AI-Driven Blogging Setup: Initial Spec Outline
-
-## 1. Introduction
-
-A brief vision of the project: a blog that’s both a documentation tool and a testbed for technical processes. It will be AI-first, accessibility-focused, and built with a classic web philosophy (semantic HTML, minimal JavaScript) in mind.
-
-## 2. Design Foundations
-
-- **Semantic HTML**: Emphasis on a clean, human- and machine-readable structure.
-- **Accessibility**: Ensuring keyboard navigation, alt text, ARIA roles, and high contrast.
-- **Minimal JavaScript**: Enhancements only where necessary, using native JS and no heavy frameworks.
-- **Performance and SEO**: Fast-loading pages, optimized images, and search-friendly design.
-- **Mobile-First Approach**: Starting design with mobile in mind and gracefully scaling up.
-
-## 3. Content Creation Workflow
-
-- **Conversational Drafting**: Posts start as a dialogue with the AI, determining title, tags, and status.
-- **Folder-Based Output**: Each post results in a structured folder (date-based) with a markdown file, assets, and metadata.
-- **Linking & Referencing**: Supports both internal and external links, with eventual enrichment via unobtrusive JavaScript.
-- **Script Evolution**: Repetitive tasks evolve into reusable scripts stored in a `/scripts/` folder.
-- **Pre-Publish Workflow**: Finalized posts are committed and pushed, triggering a CI pipeline that publishes to the `gh-pages` branch.
-
-## 4. Draft Lifecycle
-
-- Defined states: draft, review, published, archived.
-- Unpublishing changes status only; no deletion.
-- Metadata-driven visibility in indexes.
-
-## 5. Metadata & Tagging Rules
-
-- Frontmatter includes title, date, status, summary, and tags.
-- Tags are case-insensitive and normalized.
-- Tags are canonicalized to avoid duplicates.
-
-## 6. Internal Linking Conventions
-
-- Internal links use stable, relative paths.
-- Forward references allowed; unresolved links are warnings, not errors.
-
-## 7. Asset Management
-
-- Assets live in the same folder as the article.
-- Assets are durable and not auto-deleted.
-- Reuse is manual; no automatic promotion to shared assets.
-
-## 8. Review Gate
-
-- A lightweight check before publishing to ensure accuracy and completeness.
-- Human-driven with possible AI assistance (link checks, metadata completeness).
-
-## 9. AI Vocabulary
-
-- A small set of verbs (create, revise, tag, link, attach, status) to keep authoring consistent and eventually scriptable.
-
-## 10. CI and Publishing Process
-
-- Automated CI pipeline converts markdown to HTML and deploys to `gh-pages`.
-- Publish trigger is a commit push (or PR merge) that updates the live site.
 
 ## 1. Introduction (Expanded)
 
@@ -268,7 +204,7 @@ The system must support archives by date, topic, and tag, and provide a simple s
 
 Builds should be efficient, with incremental regeneration where possible so new posts do not require rebuilding the entire site. If a static generator is used, it should take advantage of caching or partial builds to keep iteration fast.
 
-## 10. CI and Publishing Process (Revisited and Expanded)
+## 11. CI and Publishing Process (Revisited and Expanded)
 
 This subsection makes the CI pipeline concrete by detailing markdown conversion, templates, and index generation.
 
@@ -296,7 +232,7 @@ This project should avoid heavy frameworks where simple scripts can suffice. If 
 
 When tasks exceed simple shell scripts, Python is an acceptable default, but the scripts should remain small, readable, and focused on a single responsibility. The goal is to keep the toolchain approachable while still powerful enough for automation.
 
-## 11. CSS and Styling (Expanded)
+## 12. CSS and Styling (Expanded)
 
 In this section, we’ll dive into the philosophy and practices that will shape the visual design of the blog. Our goal is to create a clean, responsive, and accessible design using a minimalist toolchain. We want to avoid heavyweight CSS frameworks and instead rely on native CSS features and best practices.
 
@@ -340,4 +276,3 @@ To maintain focus and prevent dependency creep, the following are explicitly NOT
 - **No Heavy Build Tooling**: Avoid Webpack, Tailwind, or complex NPM-heavy frameworks.
 
 Content from the blog should be easy to repurpose into talks, videos, and longer-form writing, which means structure and metadata are part of the creative output, not just technical overhead. The blog itself becomes the first case study in the process it documents.
-```
