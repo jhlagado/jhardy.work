@@ -93,6 +93,8 @@ We’re also leaning into a mobile-first approach, ensuring the blog looks and w
 
 Scope and audience are explicit: the primary reader is the author and technically curious peers who need a durable record of decisions. AI support is advisory; final edits, publication timing, and accountability remain with the human author.
 
+The blog also serves as a primary source for a broader content strategy. Material captured here in the form of a technical diary is intended to be repurposed for future media, including YouTube videos, Tiktoks, or long-form books.
+
 The blog is also a technical diary. Posts should be easy to create on demand, often in the 500-word range, with enough structure to carry links, code, and images when needed. The aim is to document daily work in a way that remains useful later, both to the author and to readers who want a concise, high-quality view into the process.
 
 The project is also an experiment in public voice and discoverability. It should be friendly to search engines and to other AI systems that ingest and summarize content, which means clarity, stable structure, and predictable metadata.
@@ -114,6 +116,8 @@ This section dives into the core principles that will shape the blog’s design 
 **Minimal JavaScript** doesn’t mean no JavaScript; it means using it sparingly and thoughtfully. We’ll enhance user experience with subtle improvements, like smoother page transitions or simple interactive elements, but we’ll avoid heavy frameworks or complex dependencies. The goal is to keep the site lightweight, fast, and easy to maintain.
 
 Finally, our **mobile-first approach** ensures that the site is designed to look great on smaller screens first and then gracefully adapts to larger screens. This means we’ll start with a clean, readable layout on mobile devices and then expand to take advantage of larger screens without adding unnecessary complexity.
+
+A key UX goal is **Smooth Navigation Transitions**. Conventional blogs often suffer from "undisciplined navigation flashes" during page loads. We aim to mitigate this by using the History API and XHR/Fetch to create a seamless, SPA-like experience for internal navigation while remaining a strictly static site at its core.
 
 In short, this section is all about the foundational principles that will guide the design and ensure the blog is not just functional and accessible, but also timeless and user-friendly.
 
@@ -155,6 +159,8 @@ This metadata-driven approach makes it easy to see at a glance where each post s
 
 This lifecycle gives clear, metadata-driven control over visibility from draft through publication and archival.
 
+**Author-Only Versioning**: History belongs to the author, not the UI. We leverage Git for full historical traceability, but the public site presents only the final content. There are no reader-visible revision timelines or "last edited" badges unless explicitly authored.
+
 Status changes are reversible and should be captured through version control rather than a separate audit system. A post returning from archived to draft should re-enter review before publication.
 
 Not every entry needs to be public. Drafts can serve as private diary notes or raw material until they are ready for a wider audience, and the status system should preserve that intent without requiring duplicate content.
@@ -167,7 +173,7 @@ This section is all about the backbone of how we organize and categorize each pi
 
 When it comes to **tags**, we’re taking a controlled and normalized approach. Tags are case-insensitive, which means it doesn’t matter if you write “Z80” or “z80”—they’ll be treated the same. We also ignore minor variations like hyphens or underscores, so “Z-80” and “Z_80” also get folded into the same tag. This helps keep our tagging system clean and prevents tag sprawl, where you end up with a bunch of near-duplicate tags that all mean the same thing.
 
-We’ll choose a canonical form for each tag—typically all lowercase and free of punctuation—and the system will automatically normalize any variations to that canonical form. That way, you don’t have to worry about remembering the exact format of each tag; you can just write naturally, and the system will handle the rest.
+We’ll choose a canonical form for each tag—typically all lowercase and free of punctuation—and the system will automatically normalize any variations to that canonical form. For example, `Z80`, `z-80`, and `z_80` should all collapse to the canonical `z80`. Normalization happens during the indexing process, allowing the author to use natural variations during drafting.
 
 In short, the metadata and tagging rules are here to keep everything organized and consistent. The metadata drives the visibility and categorization of each post, and the tagging rules ensure that your tags remain meaningful and easy to manage over time.
 
@@ -183,7 +189,7 @@ In this section, we’ll outline how internal links are handled to ensure that y
 
 We’ll use **relative paths** for internal links, meaning that links will point to other posts based on their folder structure rather than hard-coded URLs. This makes the system more flexible. If you need to move or rename a post, you can update the link paths without breaking the overall structure.
 
-We’ll also allow **forward references**, which means you can create links to posts that haven’t been written yet. This is especially useful when you’re planning a series of related posts and want to link them together in advance. If a forward reference doesn’t resolve right away, that’s okay—it will just be a warning rather than an error. The link will become active as soon as the target post is created.
+We’ll also allow **forward references**, which means you can create links to posts that haven’t been written yet. This is especially useful when you’re planning a series of related posts and want to link them together in advance. If a forward reference doesn’t resolve right away, that’s okay—it will just be a warning rather than an error. The link will become active as soon as the target post is created. This supports exploratory writing without being constrained by what has already been published.
 
 Overall, the goal is to keep internal linking intuitive and robust. By using a consistent linking convention and allowing for flexible references, we make it easy to maintain a well-connected and easy-to-navigate blog as it grows.
 
@@ -197,7 +203,7 @@ In this section, we’ll dive into how we handle assets—like images, code snip
 
 We also treat assets as **durable and reusable**. Once an asset is added to a post, it’s never automatically deleted or removed. If you want to reuse an image or a diagram in another article, you can simply reference it from the original folder or copy it into the new article’s folder. We’re avoiding any kind of automatic asset cleanup or deduplication so that you always have full control over your media.
 
-In the future, if you find that certain assets are used frequently across multiple articles, you can choose to move them to a shared location. But this is always a manual, intentional decision rather than an automatic process. We’re prioritizing simplicity and clarity, ensuring that each article remains self-contained by default.
+In the future, if you find that certain assets are used frequently across multiple articles, you can choose to move them to a shared location. But this is always a manual, intentional decision rather than an automatic process. We’re prioritizing simplicity and clarity, ensuring that each article remains self-contained by default. This maintains **narrative locality** and prevents hidden coupling between articles where an update to a shared asset inadvertently breaks multiple historical posts.
 
 The asset model prioritizes organization, durability, and portability by co-locating assets with their articles and avoiding automatic deletion.
 
@@ -229,7 +235,18 @@ Over time, these verbs will form the basis of a shared vocabulary that makes it 
 
 In short, the AI vocabulary is the bridge between conversational authoring and automated scripting. It gives you a consistent, easy-to-use set of tools to direct the AI and ensures that the system remains flexible and user-friendly as it evolves.
 
-Verbs should map to deterministic actions: create generates a folder and stub, revise edits content without status changes, and status updates only metadata. The vocabulary should remain stable so scripts can depend on it.
+Verbs should map to deterministic actions: 
+- **create**: Generates a folder and stub.
+- **revise**: Edits content without status changes.
+- **tag**: Assigns or modifies normalized tags.
+- **link**: Creates or adjusts internal/external links.
+- **attach**: Copies or generates assets into the article folder.
+- **status**: Updates metadata (visibility/lifecycle) only.
+- **summarize**: Specifically refines the metadata summary field.
+- **find**: Locates content by title, tag, date, or concept within the repo.
+- **inspect**: Read-only reporting on state (e.g., metadata or broken links).
+
+The vocabulary should remain stable so scripts can depend on it.
 
 These verbs should be usable from the command line or a minimal UI, so an instruction like "create a 500-word post with these links and images" can map cleanly to scripted behavior without manual UI work.
 
@@ -312,6 +329,15 @@ This project isn’t just about building a blog; it’s about creating a testbed
 In the end, this is about more than just blogging—it’s about capturing your unique perspective and sharing it with the world, all while leveraging the power of AI to make the process as seamless as possible.
 
 A short roadmap can capture which pieces are immediate (content model, publishing pipeline) and which are iterative (automation scripts, design refinements). The concluding aim is a durable, maintainable system that remains readable and useful over time.
+
+## 12. Explicit Non-Goals
+
+To maintain focus and prevent dependency creep, the following are explicitly NOT goals of this project:
+- **No CMS UI**: All authoring and management happens via conversation and CLI.
+- **No Live/Direct Database Editing**: The filesystem and Git remain the single source of truth.
+- **No Reader-Visible Version History**: Historical edits are for the author's internal use via Git.
+- **No Strict Link Enforcement**: Broken or forward links generate warnings, not errors.
+- **No Heavy Build Tooling**: Avoid Webpack, Tailwind, or complex NPM-heavy frameworks.
 
 Content from the blog should be easy to repurpose into talks, videos, and longer-form writing, which means structure and metadata are part of the creative output, not just technical overhead. The blog itself becomes the first case study in the process it documents.
 ```
