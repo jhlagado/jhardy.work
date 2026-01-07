@@ -1,6 +1,27 @@
 This document begins with a captured outline of the spec to preserve the original scope and sequencing before the expanded narrative.
 
+## Table of Contents
+**Core Sections (10)**
+- [1. Introduction (Expanded)](#1-introduction-expanded)
+- [2. Design Foundations (Expanded)](#2-design-foundations-expanded)
+- [3. Content Creation Workflow (Expanded)](#3-content-creation-workflow-expanded)
+- [4. Draft Lifecycle (Expanded)](#4-draft-lifecycle-expanded)
+- [5. Metadata & Tagging Rules (Expanded)](#5-metadata--tagging-rules-expanded)
+- [6. Internal Linking Conventions (Expanded)](#6-internal-linking-conventions-expanded)
+- [7. Asset Management (Expanded)](#7-asset-management-expanded)
+- [8. Review Gate (Expanded)](#8-review-gate-expanded)
+- [9. AI Vocabulary (Expanded)](#9-ai-vocabulary-expanded)
+- [10. CI and Publishing Process (Expanded)](#10-ci-and-publishing-process-expanded)
+
+**Supporting Sections**
+- [Original Outline (Verbatim)](#original-outline-verbatim)
+- [10. CI and Publishing Process (Revisited and Expanded)](#10-ci-and-publishing-process-revisited-and-expanded)
+- [11. CSS and Styling (Expanded)](#11-css-and-styling-expanded)
+- [Conclusion](#conclusion)
+
 ---
+
+## Original Outline (Verbatim)
 
 ```markdown
 # AI-Driven Blogging Setup: Initial Spec Outline
@@ -243,4 +264,3 @@ This project isn’t just about building a blog; it’s about creating a testbed
 In the end, this is about more than just blogging—it’s about capturing your unique perspective and sharing it with the world, all while leveraging the power of AI to make the process as seamless as possible.
 
 A short roadmap can capture which pieces are immediate (content model, publishing pipeline) and which are iterative (automation scripts, design refinements). The concluding aim is a durable, maintainable system that remains readable and useful over time.
-
