@@ -183,7 +183,7 @@ Thumbnails are optional but supported. If used, they should be small, lightweigh
 
 In this section, we’ll flesh out the idea of the review gate—the final checkpoint before a post goes from “review” to “published.” The review gate is not about creating bureaucratic hurdles; it’s about ensuring quality and consistency before a post goes live.
 
-At this stage, you or the AI will do a final pass over the content to make sure everything is in order. You’ll confirm that the summary accurately reflects the article, that all internal and external links are valid, and that any images or other assets are properly included. This is also a good time to double-check the metadata—things like tags and statuses—to make sure everything is correct and complete.
+At this stage, you or the AI will do a final pass over the content to make sure everything is in order. You’ll confirm that the summary, when present, accurately reflects the article, that all internal and external links are valid, and that any images or other assets are properly included. This is also a good time to double-check the metadata—things like tags and statuses—to make sure everything is correct and complete.
 
 The review gate is intended to be a lightweight, human-friendly process. It can be as simple as running through a quick checklist or having the AI provide a brief summary of what’s been verified. The key is to ensure that the post is polished and ready for public viewing without adding unnecessary complexity.
 

@@ -103,7 +103,7 @@ Build an **article index** used by queries.
 Each article index record includes:
 
 * path-derived fields
-* frontmatter fields (status, tags, stream)
+* frontmatter fields (status, tags, stream, summary)
 * absolute source path to article directory
 * path to Markdown file
 

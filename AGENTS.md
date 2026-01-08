@@ -1,4 +1,4 @@
-# AGENTS.md — AI Operating Guidelines
+# AGENTS.md - AI Operating Guidelines
 
 This document defines **mandatory constraints and operating principles** for AI agents working in this repository. It is **normative**. If an AI-generated change conflicts with this document or referenced specs, the change is wrong.
 
@@ -16,7 +16,7 @@ Assumptions:
 - You do not require frameworks to compensate for lack of knowledge.
 - You are capable of reasoning from first principles.
 
-Do **not** introduce tools, abstractions, or patterns “for safety” or “best practice” unless explicitly justified.
+Do **not** introduce tools, abstractions, or patterns "for safety" or "best practice" unless explicitly justified.
 
 ---
 
@@ -162,7 +162,7 @@ Do not:
 
 - optimize prematurely
 - generalize abstractly
-- “future-proof” speculatively
+- "future-proof" speculatively
 - introduce hidden control flow
 
 ---
@@ -192,7 +192,7 @@ Bullet lists must not replace explanation. If a bullet list appears without surr
 
 ### 9.3 Explicitly Discouraged Styles
 
-Avoid terse “AI cheat-sheet” formatting, dense unmotivated lists, keyword dumps, abstract summaries without context, or documentation that reads like prompt instructions.
+Avoid terse "AI cheat-sheet" formatting, dense unmotivated lists, keyword dumps, abstract summaries without context, or documentation that reads like prompt instructions.
 
 Documentation that optimizes for machine parsing at the expense of human understanding is considered a design failure.
 
@@ -204,7 +204,7 @@ Do not aggressively deduplicate prose if it harms clarity.
 
 ### 9.5 Tone and Voice
 
-Preferred tone is calm, precise, explanatory, and confident but not verbose. Avoid marketing language, instructional condescension, or overly compressed “spec-speak.”
+Preferred tone is calm, precise, explanatory, and confident but not verbose. Avoid marketing language, instructional condescension, or overly compressed "spec-speak."
 
 The goal is for a technically competent human to read the documentation months or years later and immediately regain full context.
 
@@ -212,7 +212,7 @@ The goal is for a technically competent human to read the documentation months o
 
 Before producing or modifying documentation, ask:
 
-> “Would a careful human reader understand not just what this does, but why it exists?”
+> "Would a careful human reader understand not just what this does, but why it exists?"
 
 If the answer is no, expand the prose.
 
@@ -222,7 +222,7 @@ If the answer is no, expand the prose.
 
 If you find yourself thinking:
 
-> “This would be easier if we just…”
+> "This would be easier if we just..."
 
 Stop.
 
@@ -232,4 +232,4 @@ Ease is not the goal. Clarity, durability, and correctness are.
 
 ## Status
 
-This document is **locked**. Any AI-generated contribution that violates it should be rejected, even if it “works”.
+This document is **locked**. Any AI-generated contribution that violates it should be rejected, even if it "works".
