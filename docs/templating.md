@@ -345,7 +345,7 @@ Markdown body is **not rendered** during indexing.
 From path:
 
 ```
-blog/2026/01/08/02/02-z80-disassembly/
+blog/2026/01/08/02-z80-disassembly/
 ```
 
 derive:
