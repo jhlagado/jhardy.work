@@ -103,7 +103,7 @@ Build an **article index** used by queries.
 Each article index record includes:
 
 * path-derived fields
-* frontmatter fields (status, tags, stream, summary)
+* frontmatter fields (status, tags, stream, summary, thumbnail)
 * absolute source path to article directory
 * path to Markdown file
 
@@ -244,6 +244,7 @@ Verify the generated output is internally consistent.
 * all referenced assets exist
 * no duplicate output paths
 * no missing HTML outputs for required templates
+* no `<template>` elements remain in output HTML
 
 ### 9.3 Canonical URL Ownership
 

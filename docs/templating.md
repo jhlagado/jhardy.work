@@ -165,7 +165,13 @@ If query `X` returns N article records:
 
 ---
 
-### 3.4 Ordering Guarantee
+### 3.4 Template Element Removal
+
+After stamping, the `<template data-query="X">` element itself must be removed from the output. Rendered HTML must not contain `<template>` elements.
+
+---
+
+### 3.5 Ordering Guarantee
 
 The order of rendered results is **entirely defined by the query**.
 

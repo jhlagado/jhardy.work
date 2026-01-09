@@ -120,6 +120,22 @@ If a summary needs to be visible, it must also be written in the Markdown body.
 
 ---
 
+### 3.4 Thumbnail
+
+```yaml
+thumbnail: assets/thumbnail.jpg
+```
+
+Rules:
+
+* optional
+* relative path within the article directory
+* used for indexing or external feeds, not rendering
+
+If a thumbnail needs to be visible, it must also be authored in the Markdown body.
+
+---
+
 ## 4. Derived Fields (From Filesystem Path)
 
 From the canonical article path:

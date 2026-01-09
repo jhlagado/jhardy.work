@@ -87,8 +87,8 @@ These fields perform **exact match filtering**.
 | `tag`    | string           | matches if value ∈ tag set                 |
 | `stream` | string           | exact match                                |
 | `year`   | number           | 4-digit year                               |
-| `month`  | string or number | must represent 2-digit month               |
-| `day`    | string or number | must represent 2-digit day                 |
+| `month`  | string or number | month 1-12; zero-padded strings allowed    |
+| `day`    | string or number | day 1-31; zero-padded strings allowed      |
 
 Rules:
 
@@ -97,6 +97,8 @@ Rules:
 * no arrays
 * no partial matches
 * case-normalized
+
+Month and day values are normalized to integers before comparison. Strings such as `"01"` and `"1"` are treated as the same value.
 
 ---
 
@@ -119,6 +121,8 @@ Rules:
 * inclusive range
 * `from` ≤ `to`
 * no open-ended ranges
+
+Range endpoints are normalized to integers before comparison.
 
 ---
 

@@ -99,7 +99,7 @@ Prompts should accept explicit parameters such as target length, required links,
 
 Posts should support code snippets as first-class content. Snippets should live in fenced code blocks with language identifiers where possible, remain copyable without client-side tooling, and stay readable in plain HTML. If a snippet is large or likely to be reused, it should be stored as a separate file in the post folder and referenced explicitly from the markdown.
 
-The drafting flow should accept asset paths and image requests up front. If the author provides images, the AI should place and caption them; if images are requested, the AI should either generate them or leave explicit placeholders with filenames so the author can fill them later. Thumbnails, when used, should be indicated in the frontmatter so index pages can surface them consistently.
+The drafting flow should accept asset paths and image requests up front. If the author provides images, the AI should place and caption them; if images are requested, the AI should either generate them or leave explicit placeholders with filenames so the author can fill them later. Thumbnails, when used, should be referenced in frontmatter for indexing or feeds, and any thumbnail that must appear in an index view must also be authored in the Markdown body since templates do not read metadata.
 
 ## 4. Draft Lifecycle
 
@@ -177,7 +177,7 @@ Assets should be optimized before commit (compressed images, trimmed PDFs), and 
 
 AI-generated images are allowed but should be explicitly named and stored alongside the post with clear filenames. If generation metadata or prompts are kept, they should live in the same folder so the asset remains reproducible without external services.
 
-Thumbnails are optional but supported. If used, they should be small, lightweight images intended for index views or social sharing, and they should be generated or selected deliberately rather than inferred automatically.
+Thumbnails are optional but supported. If used, they should be small, lightweight images intended for index views or social sharing, and they should be generated or selected deliberately rather than inferred automatically. Thumbnails may be referenced in frontmatter for indexing or feeds, but any thumbnail that must be visible in an index view must also be authored in the Markdown body.
 
 ## 8. Review Gate
 
@@ -221,7 +221,7 @@ The CI pipeline automates markdown conversion, deployment, and basic validation 
 
 CI should run in a clean environment with pinned tool versions to keep output stable. Build artifacts should be reproducible and stored in the gh-pages branch without manual edits.
 
-Platform selection remains open between a WordPress workflow and a static workflow, but the preference is for a markdown-first system that keeps the content programmable and portable. If WordPress is used, publishing should happen through the REST API or wp-cli with application passwords so the UI is optional. If GitHub Pages is used, the pipeline should remain free and automated, with the option to bind a custom domain that the author owns.
+The canonical implementation is the static, query-driven pipeline defined in this PRD and the derived specs. WordPress may be used only as a short-term testbed or as a front-end generated from the same markdown source and honoring the same metadata and template separation; it must not become a parallel source of truth. If GitHub Pages is used, the pipeline should remain free and automated, with the option to bind a custom domain that the author owns.
 
 Cost control matters. The default assumption is free or near-zero hosting and tooling, with paid services only if they bring clear, deliberate value. The existing WordPress blog can serve as a testbed while a static workflow is evaluated, and the existing resume site on GitHub Pages can be merged into the same repo or linked as a first-class section. Setup and publishing should be achievable from the command line using tools like `gh` and `wp-cli`, with UI workflows treated as optional rather than required.
 
@@ -255,7 +255,7 @@ In addition to individual article pages, the CI process will also generate index
 
 We’ll aim to write as many of these tools as possible in-house, with the AI generating the necessary scripts over time. This allows us to keep the process flexible and tailored to your needs, without being locked into a large, complex framework. The CI pipeline will orchestrate these tools, running the conversion process and deploying the final HTML to your GitHub Pages branch.
 
-Template rendering should separate content from layout, and indexes should be generated from frontmatter rather than file system heuristics to avoid drift.
+Template rendering should separate content from layout, and indexes should be generated from frontmatter plus filesystem-derived fields rather than ad hoc heuristics or filename inference.
 
 This project should avoid heavy frameworks where simple scripts can suffice. If a static site generator is used, it should remain a thin layer, and if not, the AI can generate and maintain small Python or shell scripts for indexing, rendering, and deployment. The scripts should live in the repository so the workflow remains transparent and reproducible.
 

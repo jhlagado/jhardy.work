@@ -202,6 +202,8 @@ Allowed for:
 Exact match only.
 AND semantics only.
 
+Month and day values are normalized to integers before comparison. The filesystem uses zero-padded segments, but queries may use numeric values or zero-padded strings as long as they normalize to the same integer.
+
 ---
 
 ### 8.2 Numeric Ranges

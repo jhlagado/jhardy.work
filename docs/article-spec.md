@@ -27,7 +27,7 @@ stream: rebuild-log
 ---
 ```
 
-Here, the `status` field controls visibility (e.g., preventing drafts from appearing in public feeds), while the `stream` field categorizes the post into an ongoing thematic flow (like a specific project log). An optional `summary` may be included for indexing or external feeds, but it is not rendered. We avoid placing titles or dates in frontmatter to prevent metadata drift; those values belong in the human-facing body.
+Here, the `status` field controls visibility (e.g., preventing drafts from appearing in public feeds), while the `stream` field categorizes the post into an ongoing thematic flow (like a specific project log). Optional `summary` and `thumbnail` fields may be included for indexing or external feeds, but they are not rendered. We avoid placing titles or dates in frontmatter to prevent metadata drift; those values belong in the human-facing body.
 
 ### 2.2 The Visible Document (The Mirroring Requirement)
 Because our rendering templates are intentionally "dumb" and cannot access frontmatter, the document body must be self-contained. Any information intended for the reader—such as the title, the date of creation, or the categorical tags—must be authored directly in the Markdown prose. This "mirroring" ensures that if the build system disappears tomorrow, the document remains perfectly legible to a human reader.
