@@ -94,18 +94,18 @@ Frontmatter exists **only** to support:
 * indexing
 * querying
 * build-time decisions
+* summary rendering in built-in views
 
-No metadata access at render time. Visible metadata (title, date, etc.) must be authored directly in the Markdown body.
+Templates do not access metadata. Full article rendering uses only Markdown bodies. Summary views are a built-in render mode that may use frontmatter fields.
 
 ### 4.2 Published Content Rule
 
-If a field is visible on the rendered page (date, tag, label, etc.):
+If a field is visible on a full article page (date, tag, label, etc.):
 
 * it **must exist in the Markdown body**
 * even if it also exists in metadata
 
-Metadata is not a rendering input.
-Rendered pages are self-contained documents.
+Summary and index views are a controlled exception: they may render frontmatter values using the built-in summary renderer.
 
 ---
 

@@ -83,7 +83,7 @@ This section breaks down how each blog post comes to life, from the initial conv
 
 **Conversational Drafting** is at the heart of this workflow. Instead of starting with a blank page, you’ll have a dialogue with the AI. During this chat, the AI will help you figure out what the post is about, suggest a human-readable title, and identify relevant tags. It’ll also clarify the post’s status—whether it’s a draft, ready for review, or good to go live. Along the way, the AI will help you gather any necessary assets, like code snippets, images, or links, and figure out where they fit into the post.
 
-Once you’ve got all that figured out, the AI will generate a **folder-based output**. Each post will live in its own date-based folder (like `/blog/YYYY/MM/DD/NN-slug/`) and include a single markdown file along with any co-located assets like images or code. The markdown file will have embedded frontmatter metadata for status, tags, stream, and an optional summary so indexing stays consistent while visible titles and dates live in the body.
+Once you’ve got all that figured out, the AI will generate a **folder-based output**. Each post will live in its own date-based folder (like `/blog/YYYY/MM/DD/NN-slug/`) and include a single markdown file along with any co-located assets like images or code. The markdown file will have embedded frontmatter metadata for status, tags, stream, title, optional summary, and optional thumbnail so index views are consistent while full article titles and dates remain authored in the body.
 
 **Linking and referencing** are also built into this workflow. You’ll be able to add internal links to other posts using relative paths or shortcodes and include external links that the AI can help curate. Eventually, we might wrap these links in semantic tags or add unobtrusive JavaScript enhancements like tooltips, but the core idea is to keep linking straightforward and reliable.
 
@@ -123,7 +123,7 @@ Scheduling can remain simple: publication should be triggered by status changes 
 
 ## 5. Metadata & Tagging Rules
 
-This section is all about the backbone of how we organize and categorize each piece of content—through metadata and tags. The metadata lives in the frontmatter of each markdown file and acts as the single source of truth for discovery and indexing. It includes fields like status, tags, stream, and an optional summary, while dates are derived from the filesystem and titles live in the body. Each of these fields helps determine where and how the post appears across the site.
+This section is all about the backbone of how we organize and categorize each piece of content—through metadata and tags. The metadata lives in the frontmatter of each markdown file and acts as the single source of truth for discovery and indexing. It includes fields like status, tags, stream, title, optional summary, and optional thumbnail, while dates are derived from the filesystem and article titles in the body remain free-form. The frontmatter title is for summary and index views and may differ from the body title. Title and summary support only minimal inline formatting (bold, italic, and links). Each of these fields helps determine where and how the post appears across the site.
 
 When it comes to **tags**, we’re taking a controlled and normalized approach. Tags are case-insensitive, which means it doesn’t matter if you write “Z80” or “z80”—they’ll be treated the same. We also ignore minor variations like hyphens or underscores, so “Z-80” and “Z_80” also get folded into the same tag. This helps keep our tagging system clean and prevents tag sprawl, where you end up with a bunch of near-duplicate tags that all mean the same thing.
 
@@ -250,6 +250,8 @@ Each markdown file will be processed to extract its content and metadata, and th
 ### Index and Summary Pages
 
 In addition to individual article pages, the CI process will also generate index pages that list articles by tag, date, or other criteria. For example, we’ll have tag-based indexes that group articles by topic and date-based indexes that organize posts chronologically. Each of these summary pages will be automatically updated whenever new content is added, ensuring that your site’s navigation is always up-to-date.
+
+Summary and index pages should use a built-in summary renderer that draws from frontmatter and filesystem-derived fields, with a fixed HTML structure that remains stylable via CSS. Templates only select the view mode; they do not interpolate metadata directly.
 
 ### Minimal Toolchain, Maximum Flexibility
 

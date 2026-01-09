@@ -93,12 +93,15 @@ for each template:
       replace slot with fallback HTML
     else:
       for each article in list:
-        render markdown to HTML fragment
+        if data-view is summary or summary-list:
+          render built-in summary block from frontmatter and derived fields
+        else:
+          render markdown to HTML fragment
         inject fragment
   emit final HTML document
 ```
 
-No metadata access at render time. Visible metadata (title, date, etc.) must be authored directly in the Markdown body.
+Templates do not access metadata. Full article rendering uses Markdown bodies, while summary views are a built-in exception that renders frontmatter fields.
 
 ---
 
