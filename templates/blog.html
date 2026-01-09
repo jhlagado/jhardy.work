@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>jhardy.work</title>
+  <title>Archive - jhardy.work</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" />
   <link rel="icon" type="image/svg+xml" href="/assets/semantic-scroll.svg" />
   <link rel="stylesheet" href="/assets/site.css" />
@@ -16,17 +16,15 @@
       </a>
       <p class="site-name"><a href="/">jhardy.work</a></p>
       <nav class="site-nav">
-        <a href="/content/blog/">Archive</a>
+        <a href="/">Home</a>
       </nav>
     </header>
     <main>
-      <template data-query="home-posts">
-        <p class="summary-empty">No posts yet.</p>
-      </template>
+      <h1>Archive</h1>
+      <ul class="archive-years">
+        {{year_list}}
+      </ul>
     </main>
-    <footer class="site-footer">
-      <p>Published from the same repo that builds this site. <a href="https://github.com/jhlagado/jhardy.work">GitHub</a>.</p>
-    </footer>
   </div>
   <script>
     if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
