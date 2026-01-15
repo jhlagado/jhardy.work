@@ -14,5 +14,8 @@
     "lint:gate": "node scripts/prose-lint.js --all --gate",
     "srv": "node scripts/serve.js",
     "update": "bash -c 'git fetch upstream && git merge --no-edit upstream/main'"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
   }
 }
