@@ -12,6 +12,7 @@ This skill covers day‑to‑day operations for Scribere and the Semantic Scroll
 ## Workflow
 
 Confirm which repo is in scope (`scribere` engine or `semantic-scroll` instance), then read `AGENTS.md` and the relevant specs (`docs/PRD.md`, `docs/templating.md`, `docs/queries.md`, `docs/ci-pipeline.md`) before proposing changes.
+Treat `AGENTS.md` as mandatory. It is the entry point for any work in this repo and must be followed throughout.
 
 For first‑time setup, use `npm run setup` in a fresh repo. This copies `/example/` into `/content/`, writes `content/site.json`, and ensures an `upstream` remote exists. Do not re‑copy content if `/content/` already exists.
 
