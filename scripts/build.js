@@ -70,6 +70,9 @@ const LINT_REPORTS_BY_PATH = LINT_REPORT ? buildLintReportMap(LINT_REPORT) : nul
 const SOFT_FAIL = process.env.SOFT_FAIL === '1';
 const BUILD_REPORT_PATH = resolveBuildReportPath(process.env.BUILD_REPORT_PATH);
 const BUILD_WARNINGS = [];
+const INDEX_CACHE_PATH = path.join(ROOT, 'temp', 'index.json');
+const INDEX_CACHE_VERSION = 1;
+const INCREMENTAL = isTruthy(process.env.INCREMENTAL);
 
 const ARTICLE_TEMPLATE = resolveTemplatePath('article.html');
 const INDEX_TEMPLATE = resolveTemplatePath('summary-index.html');
