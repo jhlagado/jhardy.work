@@ -23,7 +23,7 @@ npm start
 
 Instance metadata lives in `content/site.json`.
 
-## Pulling engine updates
+## Pulling engine updates!
 
 This repo can pull updates from Scribere without overwriting instance files:
 
