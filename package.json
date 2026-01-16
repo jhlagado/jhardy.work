@@ -2,12 +2,14 @@
   "name": "semantic-scroll",
   "private": true,
   "scripts": {
-    "start": "bash scripts/start.sh",
-    "build": "node scripts/build.js",
-    "lint": "node scripts/prose-lint.js",
-    "update": "bash scripts/update.sh"
+    "start": "scribere-start",
+    "build": "scribere-build",
+    "lint": "scribere-lint",
+    "rebuild": "scribere-rebuild",
+    "publish": "scribere-publish",
+    "update": "scribere-update"
   },
-  "devDependencies": {
-    "nodemon": "^3.1.11"
+  "dependencies": {
+    "scribere": "git+https://github.com/jhlagado/scribere.git"
   }
 }
