@@ -6,6 +6,8 @@ https://github.com/jhlagado/scribere
 
 If you want to start a new blog, follow the Scribere setup guide. This repo is the reference instance and includes the content, templates, assets, and queries under `content/`.
 
+Documentation lives in the Scribere dependency under `node_modules/scribere/docs/`.
+
 ## Local development
 
 Install Node.js from the official site: https://nodejs.org/en
